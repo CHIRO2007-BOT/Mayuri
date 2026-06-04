@@ -7,6 +7,7 @@
 <title>Mayuri ❤️</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -22,7 +23,7 @@ justify-content:center;
 align-items:center;
 background:linear-gradient(-45deg,#ff4d6d,#ff85a2,#ffb3c6,#ff758f);
 background-size:400% 400%;
-animation:bgMove 10s ease infinite;
+animation:bgMove 12s ease infinite;
 text-align:center;
 }
 
@@ -36,21 +37,22 @@ text-align:center;
 background:rgba(255,255,255,0.15);
 padding:35px;
 border-radius:25px;
-backdrop-filter:blur(10px);
+backdrop-filter:blur(12px);
 box-shadow:0 0 30px rgba(255,255,255,.3);
 z-index:10;
-max-width:600px;
+max-width:650px;
 }
 
 h1{
 font-size:3rem;
 color:white;
-margin-bottom:10px;
+margin-bottom:15px;
 }
 
 h2{
 color:white;
 margin-bottom:25px;
+min-height:50px;
 }
 
 button{
@@ -66,10 +68,13 @@ transition:.3s;
 #yes{
 background:#ff006e;
 color:white;
+box-shadow:0 0 20px #ff006e;
+animation:glow 1.5s infinite alternate;
 }
 
-#yes:hover{
-transform:scale(1.1);
+@keyframes glow{
+from{box-shadow:0 0 10px #ff006e;}
+to{box-shadow:0 0 35px #ff006e;}
 }
 
 #no{
@@ -81,13 +86,12 @@ color:#ff006e;
 display:none;
 color:white;
 font-size:1.3rem;
-line-height:1.7;
+line-height:1.8;
 margin-top:20px;
 }
 
 .heart{
 position:absolute;
-font-size:22px;
 pointer-events:none;
 animation:float 6s linear forwards;
 }
@@ -105,6 +109,25 @@ transform:translateY(-100px);
 opacity:0;
 }
 }
+
+.petal{
+position:absolute;
+font-size:24px;
+pointer-events:none;
+animation:fall 8s linear forwards;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-100px) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+}
+
 </style>
 
 </head>
@@ -115,7 +138,7 @@ opacity:0;
 
 <h1>Mayuri ❤️</h1>
 
-<h2>Will you be mine forever?</h2>
+<h2 id="typewriter"></h2>
 
 <button id="yes" onclick="yesClick()">Yes ❤️</button>
 
@@ -154,8 +177,24 @@ Shivam ❤️
 
 <script>
 
-// Floating Hearts
+// TYPEWRITER
+const text="Mayuri, will you be mine forever? ❤️";
+let i=0;
+
+function typeWriter(){
+if(i<text.length){
+document.getElementById("typewriter").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,80);
+}
+}
+
+window.onload=typeWriter;
+
+
+// FLOATING HEARTS
 setInterval(()=>{
+
 const heart=document.createElement("div");
 
 heart.className="heart";
@@ -173,7 +212,26 @@ heart.remove();
 },250);
 
 
-// Moving No Button
+// FALLING ROSES
+setInterval(()=>{
+
+const petal=document.createElement("div");
+
+petal.className="petal";
+petal.innerHTML="🌹";
+
+petal.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(petal);
+
+setTimeout(()=>{
+petal.remove();
+},8000);
+
+},700);
+
+
+// MOVING NO BUTTON
 const noBtn=document.getElementById("no");
 
 noBtn.addEventListener("mouseover",()=>{
@@ -189,7 +247,7 @@ Math.random()*(window.innerHeight-60)+"px";
 });
 
 
-// Fireworks
+// YES BUTTON
 function yesClick(){
 
 document.getElementById("yes").style.display="none";
@@ -197,22 +255,22 @@ document.getElementById("no").style.display="none";
 
 document.getElementById("message").style.display="block";
 
-for(let i=0;i<200;i++){
+for(let i=0;i<350;i++){
 
 const spark=document.createElement("div");
 
 spark.style.position="absolute";
-spark.style.width="10px";
-spark.style.height="10px";
+spark.style.width="12px";
+spark.style.height="12px";
 spark.style.borderRadius="50%";
 
 const colors=[
-"red",
-"yellow",
-"pink",
-"white",
-"orange",
-"purple"
+"#ff006e",
+"#ffbe0b",
+"#fb5607",
+"#8338ec",
+"#3a86ff",
+"white"
 ];
 
 spark.style.background=
@@ -223,20 +281,22 @@ spark.style.top="50%";
 
 document.body.appendChild(spark);
 
-const x=(Math.random()-0.5)*1000;
-const y=(Math.random()-0.5)*1000;
+const x=(Math.random()-0.5)*1400;
+const y=(Math.random()-0.5)*1400;
 
-spark.animate([
+spark.animate(
+[
 {transform:"translate(0,0)",opacity:1},
 {transform:`translate(${x}px,${y}px)`,opacity:0}
 ],
 {
-duration:2500
-});
+duration:3000
+}
+);
 
 setTimeout(()=>{
 spark.remove();
-},2500);
+},3000);
 
 }
 
@@ -246,4 +306,3 @@ spark.remove();
 
 </body>
 </html>
-
