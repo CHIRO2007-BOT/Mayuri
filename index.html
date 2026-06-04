@@ -1,16 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Music Website</title>
+    <meta charset="UTF-8">
+    <title>My Special Website 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+
+            /* Background */
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .player {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        audio {
+            width: 250px;
+            outline: none;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>My Song Player</h1>
+    <h1>💖 Welcome to My Special Website 💖</h1>
+    <p>Made with love and music 🎶</p>
 
-<audio controls>
-    <source src="song.mp3" type="audio/mpeg">
-    Your browser does not support audio.
-</audio>
+    <div class="player">
+        <audio controls autoplay loop>
+            <source src="song.mp3" type="audio/mpeg">
+            Your browser does not support audio.
+        </audio>
+    </div>
 
 </body>
 </html>
