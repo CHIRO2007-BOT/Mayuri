@@ -2,82 +2,64 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
+<title>Proposal ❤️</title>
 
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: Arial;
     background: linear-gradient(135deg, #ff4d6d, #ff99ac);
     color: white;
     text-align: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.card {
-    background: rgba(0,0,0,0.3);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+.container {
+    margin-top: 15%;
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 50px;
 }
 
 p {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 button {
-    padding: 12px 25px;
+    padding: 12px 20px;
     margin: 10px;
     border: none;
-    border-radius: 25px;
-    font-size: 16px;
+    border-radius: 20px;
     cursor: pointer;
 }
 
-.yes {
-    background: #00c853;
-    color: white;
-}
-
-.no {
-    background: #d50000;
-    color: white;
-}
-
-.music-btn {
-    background: white;
-    color: #ff4d6d;
-    margin-top: 20px;
-}
+.yes { background: green; color: white; }
+.no { background: red; color: white; }
+.music { background: white; color: #ff4d6d; }
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 AUDIO -->
+<!-- 🎵 SONG -->
 <audio id="song" loop>
     <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<div class="card">
+<div class="container">
+
     <h1>❤️ I Have Something For You ❤️</h1>
-    <p>Will you be mine forever?</p>
+    <p>Will you be mine?</p>
 
-    <button class="yes" onclick="alert('Yay! ❤️ You made me the happiest person!')">YES 💖</button>
-    <button class="no" onclick="alert('I will keep trying ❤️')">NO 💔</button>
+    <button class="yes" onclick="alert('❤️ You said YES!')">YES</button>
+    <button class="no" onclick="alert('💔 Okay...')">NO</button>
 
-    <br>
+    <br><br>
 
-    <button class="music-btn" onclick="document.getElementById('song').play()">
+    <button class="music" onclick="document.getElementById('song').play()">
         🎵 Play Music
     </button>
+
 </div>
 
 </body>
