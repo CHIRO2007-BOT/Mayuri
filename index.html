@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,22 +9,32 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial;
-    background: linear-gradient(135deg, #ff4d6d, #ff99ac);
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     text-align: center;
     color: white;
 }
 
+/* CARD */
 .card {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    z-index: 10;
+    background: rgba(255,255,255,0.15);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 25px rgba(255,255,255,0.2);
 }
 
+/* TEXT */
 h1 {
     font-size: 40px;
+    text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff99ac;
 }
 
+/* BUTTONS */
 button {
     padding: 12px 20px;
     border: none;
@@ -38,79 +45,157 @@ button {
 }
 
 #yes {
-    background: green;
+    background: #00c853;
     color: white;
 }
 
 #no {
-    background: red;
+    background: #d50000;
     color: white;
     position: absolute;
 }
 
-/* hearts */
-.heart {
+/* FLOATING */
+.heart, .rose, .flower {
     position: absolute;
     font-size: 20px;
-    animation: float 6s linear infinite;
+    animation: floatUp 6s linear infinite;
 }
 
-@keyframes float {
+@keyframes floatUp {
     0% { transform: translateY(100vh); opacity: 1; }
     100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* FIREWORKS */
+.spark {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: yellow;
+    border-radius: 50%;
+    animation: boom 1s infinite;
+}
+
+@keyframes boom {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🎵 MUSIC -->
 <audio id="song" loop>
     <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<div class="card">
-    <h1>❤️ Will you be mine? ❤️</h1>
+<!-- 💌 CARD -->
+<div class="card" id="card">
 
-    <button id="yes" onclick="alert('💖 Yay! You said YES!')">YES</button>
-    <button id="no">NO</button>
+    <h1>Will you be mine forever? ❤️</h1>
+
+    <button id="yes">YES 💖</button>
+    <button id="no">NO 💔</button>
 
     <br><br>
 
-    <button onclick="document.getElementById('song').play()">
-        🎵 Play Music
-    </button>
+    <button onclick="playMusic()">🎵 Play Music</button>
+
 </div>
 
 <script>
 
-// 🎵 play music on click anywhere
-document.body.addEventListener("click", function(){
-    document.getElementById("song").play();
-});
+let celebrationMode = false;
 
-// 💖 floating hearts
-setInterval(() => {
-    let h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "💖";
-    h.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 6000);
-}, 300);
+/* 🎵 FIX MUSIC */
+function playMusic() {
+    let music = document.getElementById("song");
+    music.play().catch(() => {
+        alert("Click again to enable music 🎵");
+    });
+}
 
-// 😏 runaway NO button
+/* NO BUTTON MOVE */
 let noBtn = document.getElementById("no");
 
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("touchstart", moveButton);
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
 
-function moveButton() {
+function moveNo() {
     let x = Math.random() * (window.innerWidth - 100);
     let y = Math.random() * (window.innerHeight - 100);
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
+
+/* YES BUTTON */
+document.getElementById("yes").addEventListener("click", function() {
+
+    celebrationMode = true;
+
+    document.getElementById("card").innerHTML = `
+        <h1>💖 Thats the best desicion you ever made 💖</h1>
+      
+        <p>🎆 Forever starts now 🎆</p>
+        <button onclick="playMusic()">🎵 Play Music</button>
+    `;
+
+});
+
+/* 💖 hearts */
+setInterval(() => {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (10 + Math.random() * 20) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+}, 300);
+
+/* 🌹 roses */
+setInterval(() => {
+    let r = document.createElement("div");
+    r.className = "rose";
+    r.innerHTML = "🌹";
+    r.style.left = Math.random() * 100 + "vw";
+    r.style.fontSize = (10 + Math.random() * 20) + "px";
+    document.body.appendChild(r);
+    setTimeout(() => r.remove(), 7000);
+}, 500);
+
+/* 🌸 flowers */
+setInterval(() => {
+    let f = document.createElement("div");
+    f.className = "flower";
+    f.innerHTML = "🌸";
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.fontSize = (10 + Math.random() * 20) + "px";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 7000);
+}, 400);
+
+/* 🎆 fireworks */
+setInterval(() => {
+
+    let count = celebrationMode ? 10 : 2;
+
+    for (let i = 0; i < count; i++) {
+        let s = document.createElement("div");
+        s.className = "spark";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.top = Math.random() * 100 + "vh";
+        s.style.background = celebrationMode ? "gold" : "yellow";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1000);
+    }
+
+}, 200);
+
 </script>
 
 </body>
